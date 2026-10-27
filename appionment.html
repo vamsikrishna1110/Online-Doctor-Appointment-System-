@@ -1,0 +1,684 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarePlus - Doctor Appointment System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f9fc;
+    color: #243447;
+}
+
+/* Navigation */
+header {
+    background: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 2px 10px #00000008;
+}
+
+.logo {
+    color: #087f8c;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #263d5b;
+}
+
+nav a {
+    text-decoration: none;
+    color: #334155;
+    margin-left: 22px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #087f8c;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(120deg, #e0f7fa, #eff6ff);
+    padding: 65px 7%;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 44px;
+    line-height: 1.25;
+    color: #183b56;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #087f8c;
+}
+
+.hero p {
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background: #087f8c;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 7px;
+    padding: 14px 22px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #066570;
+}
+
+.hero-art {
+    text-align: center;
+    background: white;
+    border-radius: 25px;
+    padding: 40px 20px;
+    box-shadow: 0 8px 30px #087f8c12;
+}
+
+.doctor-emoji {
+    font-size: 110px;
+    margin-bottom: 15px;
+}
+
+.hero-art h3 {
+    color: #087f8c;
+    margin-bottom: 10px;
+}
+
+.hero-art p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Specialties */
+.section {
+    padding: 55px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 30px;
+    color: #183b56;
+    margin-bottom: 12px;
+}
+
+.section-title p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.specialties {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.specialty {
+    background: white;
+    text-align: center;
+    padding: 25px 15px;
+    border-radius: 12px;
+    border: 1px solid #e5edf3;
+    transition: 0.2s;
+}
+
+.specialty:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px #0000000b;
+}
+
+.specialty .icon {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.specialty h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.specialty p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Doctors */
+.doctors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.doctor-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #e5edf3;
+    box-shadow: 0 4px 15px #00000006;
+}
+
+.doctor-top {
+    background: #dff4f5;
+    padding: 25px;
+}
+
+.doctor-photo {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: white;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 55px;
+}
+
+.doctor-info {
+    padding: 22px;
+}
+
+.doctor-info h3 {
+    margin-bottom: 8px;
+}
+
+.specialty-name {
+    color: #087f8c;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.rating {
+    color: #e6a817;
+    margin-bottom: 15px;
+}
+
+.doctor-info p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+/* Appointment form */
+.appointment-section {
+    background: #e8f6f7;
+    padding: 55px 7%;
+}
+
+.appointment-container {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 35px;
+    align-items: start;
+}
+
+.appointment-info h2 {
+    font-size: 31px;
+    color: #183b56;
+    margin-bottom: 18px;
+}
+
+.appointment-info p {
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    background: white;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 9px;
+}
+
+.info-item strong {
+    color: #087f8c;
+}
+
+.form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px #0000000b;
+}
+
+.form-card h2 {
+    margin-bottom: 25px;
+    color: #183b56;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #334155;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d5e0e8;
+    border-radius: 7px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #087f8c;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.form-card button {
+    width: 100%;
+    margin-top: 22px;
+}
+
+#message {
+    display: none;
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #dcfce7;
+    color: #166534;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* Footer */
+footer {
+    background: #183b56;
+    color: white;
+    text-align: center;
+    padding: 25px 7%;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+footer span {
+    color: #67e8f9;
+}
+
+/* Responsive layout */
+@media (max-width: 850px) {
+    .hero,
+    .appointment-container {
+        grid-template-columns: 1fr;
+    }
+
+    .specialties {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .doctors {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 550px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0;
+    }
+
+    .hero, .section, .appointment-section {
+        padding: 35px 5%;
+    }
+
+    .specialties,
+    .doctors,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<header>
+    <div class="logo">Care<span>Plus</span> +</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#specialties">Specialties</a>
+        <a href="#doctors">Doctors</a>
+        <a href="#appointment">Book Appointment</a>
+    </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+    <div>
+        <h1>Your Health, <span>Our Priority</span></h1>
+
+        <p>
+            Find the right doctor and request an appointment
+            from the comfort of your home. Explore medical
+            specialties and choose a convenient date.
+        </p>
+
+        <a href="#appointment" class="btn">Book an Appointment</a>
+    </div>
+
+    <div class="hero-art">
+        <div class="doctor-emoji">👩‍⚕️</div>
+        <h3>Quality Healthcare</h3>
+        <p>Care, comfort and convenience for every patient.</p>
+    </div>
+</section>
+
+<!-- Specialties -->
+<section class="section" id="specialties">
+    <div class="section-title">
+        <h2>Our Medical Specialties</h2>
+        <p>Choose a department that suits your healthcare needs.</p>
+    </div>
+
+    <div class="specialties">
+        <div class="specialty">
+            <div class="icon">❤️</div>
+            <h3>Cardiology</h3>
+            <p>Heart health and care</p>
+        </div>
+
+        <div class="specialty">
+            <div class="icon">🧠</div>
+            <h3>Neurology</h3>
+            <p>Brain and nervous system</p>
+        </div>
+
+        <div class="specialty">
+            <div class="icon">🦷</div>
+            <h3>Dentistry</h3>
+            <p>Teeth and oral health</p>
+        </div>
+
+        <div class="specialty">
+            <div class="icon">👶</div>
+            <h3>Pediatrics</h3>
+            <p>Healthcare for children</p>
+        </div>
+    </div>
+</section>
+
+<!-- Doctors -->
+<section class="section" id="doctors">
+    <div class="section-title">
+        <h2>Meet Our Doctors</h2>
+        <p>Explore these sample doctor profiles.</p>
+    </div>
+
+    <div class="doctors">
+
+        <div class="doctor-card">
+            <div class="doctor-top">
+                <div class="doctor-photo">👨‍⚕️</div>
+            </div>
+            <div class="doctor-info">
+                <h3>Dr. Arjun Kumar</h3>
+                <div class="specialty-name">Cardiologist</div>
+                <div class="rating">★★★★★</div>
+                <p>Experience: 10 years</p>
+                <a href="#appointment" class="btn">Book Now</a>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-top">
+                <div class="doctor-photo">👩‍⚕️</div>
+            </div>
+            <div class="doctor-info">
+                <h3>Dr. Priya Sharma</h3>
+                <div class="specialty-name">Neurologist</div>
+                <div class="rating">★★★★★</div>
+                <p>Experience: 8 years</p>
+                <a href="#appointment" class="btn">Book Now</a>
+            </div>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-top">
+                <div class="doctor-photo">👨‍⚕️</div>
+            </div>
+            <div class="doctor-info">
+                <h3>Dr. Rahul Reddy</h3>
+                <div class="specialty-name">Dentist</div>
+                <div class="rating">★★★★☆</div>
+                <p>Experience: 6 years</p>
+                <a href="#appointment" class="btn">Book Now</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Appointment Form -->
+<section class="appointment-section" id="appointment">
+
+    <div class="appointment-container">
+
+        <div class="appointment-info">
+            <h2>Book Your Appointment</h2>
+
+            <p>
+                Fill in the form to request a visit with your
+                preferred doctor. All details below are part
+                of a demonstration website.
+            </p>
+
+            <div class="info-item">
+                <strong>📅 Flexible Scheduling</strong>
+                <p>Choose your preferred appointment date.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>👨‍⚕️ Doctor Selection</strong>
+                <p>Choose a specialty and doctor.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>📞 Contact Information</strong>
+                <p>Provide contact details for follow-up.</p>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <h2>Appointment Form</h2>
+
+            <form id="appointmentForm">
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name"
+                               placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone"
+                               placeholder="Enter phone number"
+                               pattern="[0-9+() -]{7,20}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email"
+                               placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialty">Specialty</label>
+                        <select id="specialty" required>
+                            <option value="">Select specialty</option>
+                            <option>Cardiology</option>
+                            <option>Neurology</option>
+                            <option>Dentistry</option>
+                            <option>Pediatrics</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctor">Choose Doctor</label>
+                        <select id="doctor" required>
+                            <option value="">Select doctor</option>
+                            <option>Dr. Arjun Kumar</option>
+                            <option>Dr. Priya Sharma</option>
+                            <option>Dr. Rahul Reddy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Appointment Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="time">Preferred Time</label>
+                        <select id="time" required>
+                            <option value="">Select time</option>
+                            <option>09:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>02:00 PM</option>
+                            <option>03:00 PM</option>
+                            <option>04:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="reason">Reason for Appointment</label>
+                        <textarea id="reason"
+                            placeholder="Briefly describe the reason (optional)"></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn">
+                    Request Appointment
+                </button>
+            </form>
+
+            <div id="message" role="status" aria-live="polite"></div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <h3>Care<span>Plus</span> +</h3>
+    <p>Online Doctor Appointment System</p>
+    <p>Frontend demonstration project using HTML, CSS and JavaScript.</p>
+    <p>Sample doctors and appointments only. Not a real healthcare service.</p>
+</footer>
+
+<script>
+const dateInput = document.getElementById("date");
+
+// Prevent choosing dates in the past.
+const today = new Date();
+const localToday = new Date(
+    today.getTime() - today.getTimezoneOffset() * 60000
+).toISOString().split("T")[0];
+
+dateInput.min = localToday;
+
+// Show a demo confirmation when the form is submitted.
+document.getElementById("appointmentForm").addEventListener("submit",
+    function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const doctor = document.getElementById("doctor").value;
+        const date = dateInput.value;
+        const time = document.getElementById("time").value;
+        const message = document.getElementById("message");
+
+        message.style.display = "block";
+        message.textContent =
+            "Demo request prepared for " + name +
+            ". Doctor: " + doctor +
+            ". Date: " + date +
+            ". Time: " + time +
+            ". This is only a local demonstration; no appointment has been booked.";
+    }
+);
+</script>
+
+</body>
+</html>
